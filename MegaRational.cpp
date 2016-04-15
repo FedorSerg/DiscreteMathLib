@@ -115,7 +115,7 @@ MegaRational operator /(const MegaRational &ob1, const MegaRational &ob2)
    MegaRational res;
    //ob2Cpy = ob2;
 	//MegaInteger temp;
-	////Переворот ob2Cpy
+	////РџРµСЂРµРІРѕСЂРѕС‚ ob2Cpy
 	//temp = ob2Cpy.numerator;
 	//ob2Cpy.numerator = MegaInteger(ob2Cpy.denominator) * (temp < 0 ? -1 : 1);
 	//ob2Cpy.denominator = temp.toMegaNatural();

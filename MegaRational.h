@@ -1,4 +1,4 @@
-﻿#ifndef MEGA_RATIONAL
+#ifndef MEGA_RATIONAL
 #define MEGA_RATIONAL
 
 #include "MegaInteger.h"

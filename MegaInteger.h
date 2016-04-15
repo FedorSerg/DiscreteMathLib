@@ -1,4 +1,4 @@
-﻿#ifndef MEGA_INTEGER
+#ifndef MEGA_INTEGER
 #define MEGA_INTEGER
 
 #include "MegaNatural.h"
