@@ -13,7 +13,7 @@ Polynom::~Polynom()
 
 long long getDegree()
 {
-	return 0;
+	return (*this).coefficients.size() - 1;
 }
 
 Polynom fluxion()
@@ -60,6 +60,12 @@ Polynom operator -(const Polynom &p1, const Polynom &p2)
 	for(i = res.coefficients.size(); i > tmp.coefficients.size(); i--)
 	{
 		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
+	}
+	i = 0;
+	while (res.coefficients[i] == 0)
+	{
+		res.coefficients.pop_front();
+		i++;
 	}
 	return res;
 }
