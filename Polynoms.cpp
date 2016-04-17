@@ -24,12 +24,52 @@ Polynom fluxion()
 
 Polynom operator +(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res;
+	Polynom res = p1;
+	Polynom tmp = p2;
+	if(p1.getDegree() < p2.getDegree())
+	{
+		for(i = p2.getDegree() - p1.getDegree(); i > 0; i--)
+		{
+			res.coefficients.push_front(0);
+		}
+	}
+	else if(p1.getDegree() > p2.getDegree())
+	{
+		for(i = p1.getDegree() - p2.getDegree(); i > 0; i--)
+		{
+			tmp.coefficients.push_front(0);
+		}
+	}
+	for(i = 0; i <= p2.getDegree(); i++)
+		{
+			res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
+		}
 	return res;
 }
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res;
+	Polynom res = p1;
+	Polynom tmp = p2;
+	int i;
+	if(p1.getDegree() < p2.getDegree())
+	{
+		for(i = p2.getDegree() - p1.getDegree(); i > 0; i--)
+		{
+			res.coefficients.push_front(0);
+		}
+	}
+	else if(p1.getDegree() > p2.getDegree())
+	{
+		for(i = p1.getDegree() - p2.getDegree(); i > 0; i--)
+		{
+			tmp.coefficients.push_front(0);
+		}
+	}
+	for(i = 0; i <= p2.getDegree(); i++)
+		{
+			res.coefficients[i] = res.coefficients[i] - tmp.coefficients[i];
+		}
+	
 	return res;
 }
 Polynom operator *(const Polynom &p1, const Polynom &p2)
@@ -72,6 +112,12 @@ Polynom operator *(const Polynom &p, const MegaRational &a)
 Polynom operator -(const Polynom &p)
 {
 	Polynom res;
+	res = p;
+	int i;
+	for(i = 0; i < res.coefficients.size(); i++)
+	{
+		res.coefficients[i] = -res.coefficients[i];
+	}
 	return res;
 }
 
@@ -83,8 +129,12 @@ Polynom& Polynom::operator= (const Polynom &p)
 
 Polynom mulByXPowK(MegaInteger k)
 {
-	Polynom res;
-	return res;
+	MegaInteger i;
+	for(i = 0; i < k; i = i + 1)
+	{
+		*this.coefficients.push_back(0);
+	}
+	return *this;
 }
 
 MegaRational factorization()
