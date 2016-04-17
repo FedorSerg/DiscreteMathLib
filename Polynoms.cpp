@@ -24,52 +24,43 @@ Polynom fluxion()
 
 Polynom operator +(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res = p1;
-	Polynom tmp = p2;
-	if(p1.getDegree() < p2.getDegree())
+	Polynom res;
+	Polynom tmp;
+	long i;
+	if(p1.getDegree() >= p2.getDegree())
 	{
-		for(i = p2.getDegree() - p1.getDegree(); i > 0; i--)
-		{
-			res.coefficients.push_front(0);
-		}
+		res = p1;
+		tmp = p2;
 	}
-	else if(p1.getDegree() > p2.getDegree())
+	else
 	{
-		for(i = p1.getDegree() - p2.getDegree(); i > 0; i--)
-		{
-			tmp.coefficients.push_front(0);
-		}
+		res = p2;
+		tmp = p1;
 	}
-	for(i = 0; i <= p2.getDegree(); i++)
-		{
-			res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
-		}
+	for(i = res.coefficients.size(); i > tmp.coefficients.size(); i--)
+	{
+		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
+	}
 	return res;
 }
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res = p1;
-	Polynom tmp = p2;
-	int i;
-	if(p1.getDegree() < p2.getDegree())
+	Polynom res, tmp;
+	long i;
+	if(p1.getDegree() >= p2.getDegree())
 	{
-		for(i = p2.getDegree() - p1.getDegree(); i > 0; i--)
-		{
-			res.coefficients.push_front(0);
-		}
+		res = p1;
+		tmp = -p2;
 	}
-	else if(p1.getDegree() > p2.getDegree())
+	else
 	{
-		for(i = p1.getDegree() - p2.getDegree(); i > 0; i--)
-		{
-			tmp.coefficients.push_front(0);
-		}
+		res = -p2;
+		tmp = p1;
 	}
-	for(i = 0; i <= p2.getDegree(); i++)
-		{
-			res.coefficients[i] = res.coefficients[i] - tmp.coefficients[i];
-		}
-	
+	for(i = res.coefficients.size(); i > tmp.coefficients.size(); i--)
+	{
+		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
+	}
 	return res;
 }
 Polynom operator *(const Polynom &p1, const Polynom &p2)
@@ -113,7 +104,7 @@ Polynom operator -(const Polynom &p)
 {
 	Polynom res;
 	res = p;
-	int i;
+	long i;
 	for(i = 0; i < res.coefficients.size(); i++)
 	{
 		res.coefficients[i] = -res.coefficients[i];
@@ -127,9 +118,9 @@ Polynom& Polynom::operator= (const Polynom &p)
 	return res;
 }
 
-Polynom mulByXPowK(MegaInteger k)
+Polynom mulByXPowK(long k)
 {
-	MegaInteger i;
+	long i;
 	for(i = 0; i < k; i = i + 1)
 	{
 		*this.coefficients.push_back(0);
