@@ -63,7 +63,12 @@ Polynom operator *(const Polynom &p, const MegaRational &a)
 
 Polynom operator -(const Polynom &p)
 {
-	return p;
+	/*Polynom res = p;
+	deque<MegaRational>::iterator it;
+	for (it = res.coefficients.begin(); it != res.coefficients.end(); it++)
+		*it = -*it;*/
+
+	return p * MegaRational(-1);
 }
 
 Polynom& Polynom::operator= (const Polynom &p)
