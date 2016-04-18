@@ -8,7 +8,7 @@ class Polynom
 {
 public:
 	Polynom();
-	Polynom(const &Polynom);
+	Polynom(const Polynom &ob);
 	~Polynom();
 
 	long long getDegree();
