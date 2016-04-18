@@ -41,6 +41,20 @@ Polynom Polynom::fluxion()
 }
 
 
+bool operator ==(const Polynom &p1, const Polynom &p2)
+{
+	if (p1.coefficients.size() != p2.coefficients.size())
+		return false;
+	for (int i = 0; i < p1.coefficients.size(); i++)
+		if (p1.coefficients[i] != p2.coefficients[i])
+			return false;
+	return true;
+}
+bool operator !=(const Polynom &p1, const Polynom &p2)
+{
+
+}
+
 Polynom operator +(const Polynom &p1, const Polynom &p2)
 {
 	Polynom res, tmp;
