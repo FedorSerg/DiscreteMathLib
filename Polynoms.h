@@ -11,6 +11,8 @@ class Polynom
 public:
 	Polynom();
 	Polynom(const Polynom &ob);
+	Polynom::Polynom(const MegaRational *coeffs, long degree);
+	Polynom::Polynom(const long *coeffs, long degree);
 	~Polynom();
 
 	const long long getDegree();

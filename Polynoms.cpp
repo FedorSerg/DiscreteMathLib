@@ -1,8 +1,25 @@
-Polynom::Polynom(){}
+Polynom::Polynom()
+{
+   this->coefficients.push_front((MegaRational) 0);
+}
+
 Polynom::Polynom(const Polynom &ob)
 {
-
+   this->coefficients = deque<MegaRational>(ob.coefficients);
 }
+
+Polynom::Polynom(const MegaRational *coeffs, long degree)
+{
+   for (long i = 0; i < degree; i++)
+	  this->coefficients.push_back(coeffs[i]);
+}
+
+Polynom::Polynom(const long *coeffs, long degree)
+{
+   for (long i = 0; i < degree; i++)
+	  this->coefficients.push_back((MegaRational) coeffs[i]);
+}
+
 Polynom::~Polynom()
 {
 
