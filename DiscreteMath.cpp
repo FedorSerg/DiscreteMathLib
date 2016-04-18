@@ -31,25 +31,3 @@ MegaNatural DiscreteMath::lcm(const MegaNatural &a, const MegaNatural &b)
 		return 0;
 	return a * b / gcd(a,b);
 }
-
-Polynom DiscreteMath::gcd(const Polynom &a, const Polynom &b)
-{
-	Polynom temp,  _a = a, _b = b;
-	if ( _a.getDegree() < _b.getDegree() )
-	{
-		temp = _a;
-		_a = _b;
-		_b = temp;
-	}
-	else
-		temp = _b;
-
-	while (temp.getDegree() != 0) 
-	{
-		temp = _a % _b;
-		_a = _b;
-		_b = temp;
-	}
-
-	return _a;
-}
