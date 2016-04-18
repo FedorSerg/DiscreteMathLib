@@ -11,5 +11,4 @@ namespace DiscreteMath
 }
 
 #include "DiscreteMath.cpp"
-
 #endif
