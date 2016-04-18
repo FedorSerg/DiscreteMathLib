@@ -52,7 +52,7 @@ bool operator ==(const Polynom &p1, const Polynom &p2)
 }
 bool operator !=(const Polynom &p1, const Polynom &p2)
 {
-
+	return !(p1 == p2);
 }
 
 Polynom operator +(const Polynom &p1, const Polynom &p2)
