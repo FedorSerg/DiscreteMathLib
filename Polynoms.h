@@ -4,11 +4,12 @@
 #include "MegaRational.h"
 #include <deque>
 
+using namespace std;
+
 class Polynom
 {
 public:
-	Polynom(MegaRational coeffs[], int maxDeg);
-	Polynom(void);
+	Polynom();
 	Polynom(const Polynom &ob);
 	~Polynom();
 
