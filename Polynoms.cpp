@@ -20,7 +20,20 @@ Polynom fluxion()
 }
 
 
-Polynom operator *(const Polynom &p1, const Polynom &p2)
+Polynom operator +(const Polynom &p1, const Polynom &p2)
+{
+	Polynom res, tmp;
+	if (p1.coefficients.size() >= p2.coefficients.size())
+		res = p1, tmp = p2;
+	else
+		res = p2, tmp = p1;
+	for (int i = 0; i < tmp.coefficients.size(); i++)
+		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
+	for (int i = res.coefficients.size(); i > 0 && res.coefficients[i] == (MegaRational)0; i--)
+		res.coefficients.pop_back();
+	return res;
+}
+Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
 	Polynom res;
 	return res;
