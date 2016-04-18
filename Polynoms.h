@@ -7,11 +7,12 @@
 class Polynom
 {
 public:
-	Polynom();
+	Polynom(MegaRational coeffs[], int maxDeg);
+	Polynom(void);
 	Polynom(const Polynom &ob);
 	~Polynom();
 
-	long long getDegree();
+	const long long getDegree();
 	Polynom fluxion(); 
 
 	friend Polynom operator +(const Polynom &p1, const Polynom &p2);

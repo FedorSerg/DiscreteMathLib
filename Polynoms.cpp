@@ -1,19 +1,20 @@
-Polynom::Polynom()
+Polynom::Polynom(MegaRational coeffs[],int maxDeg)
 {
-
+   for (int i = 0; i <= maxDeg; i++)
+	  coefficients[i] = coeffs[i];
 }
 Polynom::Polynom(const Polynom &ob)
 {
-
+   coefficients = std::deque<MegaRational>(ob.coefficients);
 }
 Polynom::~Polynom()
 {
 
 }
 
-long long getDegree()
+const long long  Polynom::getDegree()
 {
-	return (*this).coefficients.size() - 1;
+	return this->coefficients.size() - 1;
 }
 
 Polynom fluxion()
