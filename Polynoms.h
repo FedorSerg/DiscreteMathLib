@@ -4,6 +4,8 @@
 #include "MegaRational.h"
 #include <deque>
 
+using namespace std;
+
 class Polynom
 {
 public:
@@ -11,7 +13,7 @@ public:
 	Polynom(const Polynom &ob);
 	~Polynom();
 
-	long long getDegree();
+	const long long getDegree();
 	Polynom fluxion(); 
 
 	friend Polynom operator +(const Polynom &p1, const Polynom &p2);
@@ -20,6 +22,7 @@ public:
 	friend Polynom operator *(const Polynom &p1, const Polynom &p2);
 	friend Polynom operator /(const Polynom &p1, const Polynom &p2);
 	friend Polynom operator %(const Polynom &p1, const Polynom &p2);
+
 	Polynom operator -(const Polynom &p);
 	Polynom &operator =(const Polynom &p);
 private:
