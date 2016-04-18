@@ -13,9 +13,13 @@ const long long Polynom::getDegree()
 	return this->coefficients.size() - 1;
 }
 
-Polynom fluxion()
+Polynom Polynom::fluxion()
 {
 	Polynom p;
+
+	for (int i = 1; i <= this->getDegree(); i++)
+	   p.coefficients.push_front((this->coefficients[i])*(MegaRational) i);
+
 	return p;
 }
 
