@@ -51,8 +51,9 @@ Polynom operator -(const Polynom &p)
 
 Polynom& Polynom::operator= (const Polynom &p)
 {
-	Polynom res;
-	return res;
+	if (p != *this)
+		coefficients = p.coefficients;
+	return *this;
 }
 
 Polynom Polynom::mulByXPowK(MegaInteger k)
