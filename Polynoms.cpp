@@ -152,8 +152,26 @@ Polynom Polynom::mulByXPowK(long long k)
 	return *this;
 }
 
-MegaRational factorization()
+MegaRational Polynom::factorization()
 {
-	MegaRational coefficient;
-	return coefficient;
+	MegaNatural gcd, lcm = 1;
+	MegaRational coefficent;
+
+	if (isZero())
+		return (MegaRational)0;
+
+	gcd = coefficients[coefficients.size() - 1].getNumerator().toMegaNatural();
+	for (long long i = coefficients.size() - 2; i >= 0; i--)
+		if(coefficients[i] != (MegaRational)0)
+			gcd = DiscreteMath::gcd(gcd, coefficients[i].getNumerator().toMegaNatural());
+
+	for (long long i = coefficients.size() - 1; i >= 0; i--)
+		lcm = DiscreteMath::lcm(lcm, coefficients[i].getDenominator());
+
+	coefficent = coefficent * MegaRational(MegaInteger(gcd), lcm);
+
+	for (long long i = coefficients.size() - 1; i >= 0; i--)
+		coefficients[i] = coefficients[i] * MegaRational(MegaInteger(lcm), gcd);
+	
+	return coefficent;
 }

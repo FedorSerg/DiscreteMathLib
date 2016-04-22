@@ -37,6 +37,9 @@ public:
 
 	MegaRational& operator =(const MegaRational &ob);
 	string toString();
+
+	MegaNatural getDenominator();
+	MegaInteger getNumerator();
 private:
 	MegaInteger numerator;
 	MegaNatural denominator;

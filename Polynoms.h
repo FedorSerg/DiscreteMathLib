@@ -2,6 +2,7 @@
 #define POLYNOMS
 
 #include "MegaRational.h"
+#include "DiscreteMath.h"
 #include <deque>
 
 using namespace std;
