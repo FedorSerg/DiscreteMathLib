@@ -33,7 +33,7 @@ public:
 private:
 	deque<MegaRational> coefficients;
 
-	Polynom mulByXPowK(MegaInteger k);
+	Polynom mulByXPowK(long long k);
 	MegaRational factorization();
 };
 
