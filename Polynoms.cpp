@@ -57,17 +57,15 @@ Polynom operator %(const Polynom &p1, const Polynom &p2)
 
 Polynom operator *(const Polynom &p, const MegaRational &a)
 {
-	Polynom res;
+	Polynom res = p;
+	deque<MegaRational>::iterator it;
+	for (it = res.coefficients.begin(); it != res.coefficients.end(); it++)
+		*it = *it * a;
 	return res;
 }
 
 Polynom operator -(const Polynom &p)
 {
-	/*Polynom res = p;
-	deque<MegaRational>::iterator it;
-	for (it = res.coefficients.begin(); it != res.coefficients.end(); it++)
-		*it = -*it;*/
-
 	return p * MegaRational(-1);
 }
 
