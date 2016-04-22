@@ -204,6 +204,7 @@ bool operator >(const MegaNatural &ob1, const MegaNatural &ob2)
 	return 0;
 }
 
+
 MegaNatural operator +(const MegaNatural &ob1, const MegaNatural &ob2)
 {
 	MegaNatural res;
@@ -320,7 +321,6 @@ MegaNatural operator /(const MegaNatural &aa, const MegaNatural &b)
 
    return res;
 }
-
 
 MegaNatural operator %(const MegaNatural &ob1, const MegaNatural &ob2)
 {

@@ -167,7 +167,9 @@ void toCommonDenominator(MegaRational &ob1, MegaRational &ob2)
 
 string MegaRational::toString()
 {
-	string str = numerator.toString() + "/" + denominator.toString();
+	string str = numerator.toString();
+	if (denominator != 1)
+		str += "/" + denominator.toString();
 	return str;
 }
 
@@ -175,4 +177,14 @@ ostream& operator<<(ostream &os, MegaRational &ob)
 {
 	os << ob.toString();
 	return os;
+}
+
+MegaNatural MegaRational::getDenominator()
+{
+	return MegaNatural(denominator);
+}
+
+MegaInteger MegaRational::getNumerator()
+{
+	return MegaInteger(numerator);
 }
