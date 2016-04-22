@@ -139,7 +139,7 @@ Polynom& Polynom::operator= (const Polynom &p)
 
 Polynom Polynom::mulByXPowK(long long k)
 {
-	if (*this != 0)
+	//if (*this != (Polynom) 0)
 		if (k < 0)
 			while (k++ && *this != Polynom())
 				if (coefficients.size() > 1)
@@ -156,4 +156,17 @@ MegaRational factorization()
 {
 	MegaRational coefficient;
 	return coefficient;
+}
+
+
+string Polynom::toString()
+{
+   string str;
+   for (int i = 0; i < this->coefficients.size(); i++)
+	  if (i == 0)
+		 str = str + this->coefficients[i].toString() + " ";
+	  else
+		 str = str + ((coefficients[i]>(MegaRational) 0)?" + ": " ") + this->coefficients[i].toString() +  "x^" + std::to_string(i) + " ";
+
+   return str;
 }

@@ -30,6 +30,8 @@ public:
 
 	Polynom operator -(const Polynom &p);
 	Polynom &operator =(const Polynom &p);
+	string toString();
+
 private:
 	deque<MegaRational> coefficients;
 
