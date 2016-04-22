@@ -99,10 +99,25 @@ Polynom operator %(const Polynom &p1, const Polynom &p2)
 	return p1 - p2 * (p1 / p2);
 }
 
+Polynom operator *(const Polynom &p1, const Polynom &p2)
+{
+
+}
+
 Polynom operator *(const Polynom &p, const MegaRational &a)
 {
-	Polynom res;
+	Polynom res=p;
+	if (a == (MegaRational) 0)
+	{
+	   res.coefficients.empty();
+	   res.coefficients.push_back((MegaRational) 0);
+	   return res;
+	}
+
+	for (int i = 0; i < p.coefficients.size; i++)
+	   res.coefficients[i] = res.coefficients[i] * a;
 	return res;
+
 }
 
 Polynom operator -(const Polynom &p)
