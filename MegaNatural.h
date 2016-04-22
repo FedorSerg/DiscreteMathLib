@@ -35,11 +35,6 @@ public:
 	friend MegaNatural operator *(const MegaNatural &ob1, const MegaNatural &ob2);
 
 	MegaNatural& operator =(const MegaNatural &ob);
-	MegaNatural& operator +=(const MegaNatural &ob1, const MegaNatural &ob2);
-	MegaNatural& operator -=(const MegaNatural &ob1, const MegaNatural &ob2);
-	MegaNatural& operator *=(const MegaNatural &ob1, const MegaNatural &ob2);
-	MegaNatural& operator /=(const MegaNatural &ob1, const MegaNatural &ob2);
-	MegaNatural& operator %=(const MegaNatural &ob1, const MegaNatural &ob2);
 
 	string toString();
 	

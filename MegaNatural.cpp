@@ -340,28 +340,3 @@ MegaNatural operator *(const MegaNatural &ob1, const MegaNatural &ob2)
 	}
 	return res;
 }
-
-MegaNatural& operator +=(const MegaNatural &ob1, const MegaNatural &ob2)
-{
-	return ob1 + ob2;
-}
-
-MegaNatural& operator -=(const MegaNatural &ob1, const MegaNatural &ob2)
-{
-	return ob1 - ob2;
-}
-
-MegaNatural& operator *=(const MegaNatural &ob1, const MegaNatural &ob2)
-{
-	return ob1 * ob2;
-}
-
-MegaNatural& operator /=(const MegaNatural &ob1, const MegaNatural &ob2)
-{
-	return ob1 / ob2;
-}
-
-MegaNatural& operator %=(const MegaNatural &ob1, const MegaNatural &ob2)
-{
-	return ob1 % ob2;
-}
