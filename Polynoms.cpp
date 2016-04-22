@@ -25,7 +25,7 @@ Polynom::~Polynom()
 
 }
 
-const long long Polynom::getDegree()
+long long Polynom::getDegree()
 {
 	return this->coefficients.size() - 1;
 }
@@ -70,8 +70,7 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 }
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res;
-	return res;
+	return p1 + (-p2);
 }
 Polynom operator /(const Polynom &p1, const Polynom &p2)
 {
@@ -101,7 +100,14 @@ Polynom operator %(const Polynom &p1, const Polynom &p2)
 
 Polynom operator *(const Polynom &p1, const Polynom &p2)
 {
+	Polynom p1Cpy = p1, p2Cpy = p2, res = Polynom();
+	MegaRational p1Coefficient = p1Cpy.factorization(),
+		p2Coefficient = p2Cpy.factorization();
 
+	for (long long i = p2Cpy.coefficients.size() - 1; i >= 0; i--)
+		res = res + (p1Cpy * p2Cpy.coefficients[i]).mulByXPowK(i);
+
+	return res;
 }
 
 Polynom operator *(const Polynom &p, const MegaRational &a)
@@ -122,11 +128,6 @@ Polynom operator *(const Polynom &p, const MegaRational &a)
 
 Polynom operator -(const Polynom &p)
 {
-	/*Polynom res = p;
-	deque<MegaRational>::iterator it;
-	for (it = res.coefficients.begin(); it != res.coefficients.end(); it++)
-		*it = -*it;*/
-
 	return p * MegaRational(-1);
 }
 
