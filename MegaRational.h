@@ -73,8 +73,6 @@ public:
 	//Выполнил:
 	friend void toCommonDenominator(MegaRational &ob1, MegaRational &ob2);
 
-	string toString();
-
 	MegaNatural getDenominator();
 	MegaInteger getNumerator();
 private:

@@ -41,13 +41,10 @@ public:
 	friend bool operator >=(const MegaNatural &ob1, const MegaNatural &ob2);
 	friend bool operator <(const MegaNatural &ob1, const MegaNatural &ob2);
 	friend bool operator >(const MegaNatural &ob1, const MegaNatural &ob2);
-<<<<<<< HEAD
-=======
 
 	//Имя модуля: ADD_NN_N 
 	//Базовые модули: COM_NN_D
 	//Выполнил:
->>>>>>> 4812f368c54160d57db73b1108f46ea42e6a69bc
 	friend MegaNatural operator +(const MegaNatural &ob1, const MegaNatural &ob2);
 
 	//Имя модуля: SUB_NN_N
@@ -64,18 +61,11 @@ public:
 	//Базовые модули: DIV_NN_N, SUB_NN_N
 	//Выполнил:
 	friend MegaNatural operator %(const MegaNatural &ob1, const MegaNatural &ob2);
-
-<<<<<<< HEAD
-	MegaNatural& operator =(const MegaNatural &ob);
-
-	string toString();
 	
-=======
 	//Имя модуля: MUL_NN_N
 	//Базовые модули: MUL_ND_N, MUL_Nk_N, ADD_NN_N
 	//Выполнил:
 	friend MegaNatural operator *(const MegaNatural &ob1, const MegaNatural &ob2);
->>>>>>> 4812f368c54160d57db73b1108f46ea42e6a69bc
 	
 private:
 	deque<uchar> nums;
