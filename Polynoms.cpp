@@ -1,23 +1,23 @@
 Polynom::Polynom()
 {
-   this->coefficients.push_front((MegaRational) 0);
+	this->coefficients.push_front((MegaRational)0);
 }
 
 Polynom::Polynom(const Polynom &ob)
 {
-   this->coefficients = deque<MegaRational>(ob.coefficients);
+	this->coefficients = deque<MegaRational>(ob.coefficients);
 }
 
 Polynom::Polynom(const MegaRational *coeffs, long degree)
 {
-   for (long i = 0; i < degree; i++)
-	  this->coefficients.push_back(coeffs[i]);
+	for (long i = 0; i < degree; i++)
+		this->coefficients.push_back(coeffs[i]);
 }
 
 Polynom::Polynom(const long *coeffs, long degree)
 {
-   for (long i = 0; i < degree; i++)
-	  this->coefficients.push_back((MegaRational) coeffs[i]);
+	for (long i = 0; i < degree; i++)
+		this->coefficients.push_back((MegaRational)coeffs[i]);
 }
 
 Polynom::~Polynom()
@@ -35,7 +35,7 @@ Polynom Polynom::fluxion()
 	Polynom p;
 
 	for (int i = 1; i <= this->getDegree(); i++)
-	   p.coefficients.push_front((this->coefficients[i])*(MegaRational) i);
+		p.coefficients.push_front((this->coefficients[i])*(MegaRational)i);
 
 	return p;
 }
@@ -70,7 +70,7 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 }
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
-	return p1 + (-p2);
+	return p1 + -p2;
 }
 Polynom operator /(const Polynom &p1, const Polynom &p2)
 {
@@ -81,13 +81,13 @@ Polynom operator /(const Polynom &p1, const Polynom &p2)
 		return Polynom();
 	}
 
-	long long n = _p2.getDegree(), k = _p1.getDegree - n;
+	long long n = _p2.getDegree(), k = _p1.getDegree() - n;
 	while (k >= 0)
 	{
-		res.coefficients.push_back( _p1.coefficients[k + n] / _p2.coefficients[n] );
+		res.coefficients.push_back(_p1.coefficients[k + n] / _p2.coefficients[n]);
 		for (long long i = k + n; i >= k; i--)
-			_p1.coefficients[i] = _p1.coefficients[i] -	
-			_p2.coefficients[i - k] * res.coefficients[k]; 
+			_p1.coefficients[i] = _p1.coefficients[i] -
+			_p2.coefficients[i - k] * res.coefficients[k];
 		k--;
 	}
 
@@ -112,16 +112,16 @@ Polynom operator *(const Polynom &p1, const Polynom &p2)
 
 Polynom operator *(const Polynom &p, const MegaRational &a)
 {
-	Polynom res=p;
-	if (a == (MegaRational) 0)
+	Polynom res = p;
+	if (a == (MegaRational)0)
 	{
-	   res.coefficients.empty();
-	   res.coefficients.push_back((MegaRational) 0);
-	   return res;
+		res.coefficients.empty();
+		res.coefficients.push_back((MegaRational)0);
+		return res;
 	}
 
-	for (int i = 0; i < p.coefficients.size; i++)
-	   res.coefficients[i] = res.coefficients[i] * a;
+	for (int i = 0; i < p.coefficients.size(); i++)
+		res.coefficients[i] = res.coefficients[i] * a;
 	return res;
 
 }
@@ -140,7 +140,7 @@ Polynom& Polynom::operator= (const Polynom &p)
 
 Polynom Polynom::mulByXPowK(long long k)
 {
-	if (*this != 0)
+	if (*this != Polynom())
 		if (k < 0)
 			while (k++ && *this != Polynom())
 				if (coefficients.size() > 1)
@@ -158,12 +158,12 @@ MegaRational Polynom::factorization()
 	MegaNatural gcd, lcm = 1;
 	MegaRational coefficent;
 
-	if (isZero())
+	if (*this != Polynom())
 		return (MegaRational)0;
 
 	gcd = coefficients[coefficients.size() - 1].getNumerator().toMegaNatural();
 	for (long long i = coefficients.size() - 2; i >= 0; i--)
-		if(coefficients[i] != (MegaRational)0)
+		if (coefficients[i] != (MegaRational)0)
 			gcd = DiscreteMath::gcd(gcd, coefficients[i].getNumerator().toMegaNatural());
 
 	for (long long i = coefficients.size() - 1; i >= 0; i--)
@@ -173,6 +173,6 @@ MegaRational Polynom::factorization()
 
 	for (long long i = coefficients.size() - 1; i >= 0; i--)
 		coefficients[i] = coefficients[i] * MegaRational(MegaInteger(lcm), gcd);
-	
+
 	return coefficent;
 }
