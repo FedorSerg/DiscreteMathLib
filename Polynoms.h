@@ -14,6 +14,7 @@ public:
 	Polynom(const Polynom &ob);
 	Polynom::Polynom(const MegaRational *coeffs, long degree);
 	Polynom::Polynom(const long *coeffs, long degree);
+	Polynom(const string str);
 	~Polynom();
 
 	long long getDegree();
@@ -35,7 +36,6 @@ public:
 
 private:
 	deque<MegaRational> coefficients;
-
 	Polynom mulByXPowK(long long k);
 	MegaRational factorization();
 };
