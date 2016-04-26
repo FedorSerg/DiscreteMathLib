@@ -29,7 +29,7 @@ public:
 	friend bool operator ==(const Polynom &p1, const Polynom &p2);
 	friend bool operator !=(const Polynom &p1, const Polynom &p2);
 
-	Polynom operator -(const Polynom &p);
+	friend Polynom operator -(const Polynom &p);
 	Polynom &operator =(const Polynom &p);
 	string toString();
 
