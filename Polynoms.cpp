@@ -25,7 +25,7 @@ Polynom::~Polynom()
 
 }
 
-const long long Polynom::getDegree()
+long long Polynom::getDegree()
 {
 	return this->coefficients.size() - 1;
 }
@@ -70,8 +70,7 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 }
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
-	Polynom res;
-	return res;
+	return p1 + (-p2);
 }
 Polynom operator /(const Polynom &p1, const Polynom &p2)
 {
@@ -101,7 +100,14 @@ Polynom operator %(const Polynom &p1, const Polynom &p2)
 
 Polynom operator *(const Polynom &p1, const Polynom &p2)
 {
+	Polynom p1Cpy = p1, p2Cpy = p2, res = Polynom();
+	MegaRational p1Coefficient = p1Cpy.factorization(),
+		p2Coefficient = p2Cpy.factorization();
 
+	for (long long i = p2Cpy.coefficients.size() - 1; i >= 0; i--)
+		res = res + (p1Cpy * p2Cpy.coefficients[i]).mulByXPowK(i);
+
+	return res;
 }
 
 Polynom operator *(const Polynom &p, const MegaRational &a)
@@ -122,11 +128,6 @@ Polynom operator *(const Polynom &p, const MegaRational &a)
 
 Polynom operator -(const Polynom &p)
 {
-	/*Polynom res = p;
-	deque<MegaRational>::iterator it;
-	for (it = res.coefficients.begin(); it != res.coefficients.end(); it++)
-		*it = -*it;*/
-
 	return p * MegaRational(-1);
 }
 
@@ -139,7 +140,7 @@ Polynom& Polynom::operator= (const Polynom &p)
 
 Polynom Polynom::mulByXPowK(long long k)
 {
-	//if (*this != (Polynom) 0)
+	if (*this != 0)
 		if (k < 0)
 			while (k++ && *this != Polynom())
 				if (coefficients.size() > 1)
@@ -152,21 +153,26 @@ Polynom Polynom::mulByXPowK(long long k)
 	return *this;
 }
 
-MegaRational factorization()
+MegaRational Polynom::factorization()
 {
-	MegaRational coefficient;
-	return coefficient;
-}
+	MegaNatural gcd, lcm = 1;
+	MegaRational coefficent;
 
+	if (isZero())
+		return (MegaRational)0;
 
-string Polynom::toString()
-{
-   string str;
-   for (int i = 0; i < this->coefficients.size(); i++)
-	  if (i == 0)
-		 str = str + this->coefficients[i].toString() + " ";
-	  else
-		 str = str + ((coefficients[i]>(MegaRational) 0)?" + ": " ") + this->coefficients[i].toString() +  "x^" + std::to_string(i) + " ";
+	gcd = coefficients[coefficients.size() - 1].getNumerator().toMegaNatural();
+	for (long long i = coefficients.size() - 2; i >= 0; i--)
+		if(coefficients[i] != (MegaRational)0)
+			gcd = DiscreteMath::gcd(gcd, coefficients[i].getNumerator().toMegaNatural());
 
-   return str;
+	for (long long i = coefficients.size() - 1; i >= 0; i--)
+		lcm = DiscreteMath::lcm(lcm, coefficients[i].getDenominator());
+
+	coefficent = coefficent * MegaRational(MegaInteger(gcd), lcm);
+
+	for (long long i = coefficients.size() - 1; i >= 0; i--)
+		coefficients[i] = coefficients[i] * MegaRational(MegaInteger(lcm), gcd);
+	
+	return coefficent;
 }

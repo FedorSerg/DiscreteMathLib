@@ -178,3 +178,13 @@ ostream& operator<<(ostream &os, MegaRational &ob)
 	os << ob.toString();
 	return os;
 }
+
+MegaNatural MegaRational::getDenominator()
+{
+	return MegaNatural(denominator);
+}
+
+MegaInteger MegaRational::getNumerator()
+{
+	return MegaInteger(numerator);
+}

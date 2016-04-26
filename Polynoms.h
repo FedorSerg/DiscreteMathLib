@@ -2,6 +2,7 @@
 #define POLYNOMS
 
 #include "MegaRational.h"
+#include "DiscreteMath.h"
 #include <deque>
 
 using namespace std;
@@ -15,7 +16,7 @@ public:
 	Polynom::Polynom(const long *coeffs, long degree);
 	~Polynom();
 
-	const long long getDegree();
+	long long getDegree();
 	Polynom fluxion(); 
 
 	friend Polynom operator +(const Polynom &p1, const Polynom &p2);
