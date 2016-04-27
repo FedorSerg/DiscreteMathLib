@@ -116,7 +116,7 @@ void intApi(int argc, char **argv)
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
 		else if (argc == 4 && !strcmp(argv[2], "abs"))
-			cout << a.abs();
+			cout << "result: " << a.abs();
 		else
 			cout << "unknown comand + argument ct. You can try help\n";
 
@@ -160,6 +160,7 @@ void ratApi(int argc, char **argv)
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
 		else if (argc == 4)
+		{
 			if (!strcmp(argv[2], "reduct"))
 			{
 				a.reduction();
@@ -169,6 +170,7 @@ void ratApi(int argc, char **argv)
 				cout << (a.isInteger()) ? "true" : "false";
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
+		}
 
 	}
 	catch (invalid_argument &exc)
@@ -179,5 +181,36 @@ void ratApi(int argc, char **argv)
 
 void plnApi(int argc, char **argv)
 {
+	try
+	{
+		Polynom a = Polynom(argv[3]);
+		Polynom b = argc == 5 ? Polynom(argv[4]) : Polynom();
 
+		if (argc == 5)
+		{
+			if (!strcmp(argv[2], "=="))
+				cout << "result: " << ((a == b) ? "true" : "false");
+			else if (!strcmp(argv[2], "!="))
+				cout << "result: " << ((a != b) ? "true" : "false");
+			/*else if (!strcmp(argv[2], "+"))
+				cout << "result: " << (a + b);*/
+			else
+				cout << "unknown comand + argument ct. You can try help\n";
+		}
+		/*else if (argc == 4)
+			if (!strcmp(argv[2], "reduct"))
+			{
+				a.reduction();
+				cout << a;
+			}
+			else if (!strcmp(argv[2], "isint"))
+				cout << (a.isInteger()) ? "true" : "false";*/
+			else
+				cout << "unknown comand + argument ct. You can try help\n";
+
+	}
+	catch (invalid_argument &exc)
+	{
+		cout << exc.what();
+	}
 }

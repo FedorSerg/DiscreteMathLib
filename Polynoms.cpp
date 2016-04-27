@@ -16,11 +16,11 @@ Polynom::Polynom(const string str)
 
    coefficients.clear();
    if (str.length() < 9)
-	  return; 
+	   throw(invalid_argument("incorrect number input. You can try help\n"));
 
    for (auto i = 0; i < str.length(); i++)
 	  if (!isdigit(str[i]) && str[i] != 'x' && str[i] != '^' && str[i] != '+' && str[i] != '-' && str[i] != '/' && str[i] != '(' && str[i] != ')')
-		 return;
+		  throw(invalid_argument("incorrect number input. You can try help\n"));
 	 
    tmp = 0;
    if (str[0] == '-' || str[0] == '+')
@@ -30,41 +30,41 @@ Polynom::Polynom(const string str)
    {
 	  tmp1 = str.find("(", tmp);
 	  if (tmp1 != tmp)
-		 return;
+		  throw(invalid_argument("incorrect number input. You can try help\n"));
 
 	  tmp = ++tmp1;
 	  while (tmp < str.size() && isdigit(str[tmp]))
 		 tmp++;
 	  if (tmp == tmp1)
-		 return;
+		  throw(invalid_argument("incorrect number input. You can try help\n"));
 
 	  if (tmp != -1)
 	  {
 		 tmp1 = str.find("/", tmp);
 		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
-			return;		
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 
 		 tmp = ++tmp1;
 		 while (tmp < str.size() && isdigit(str[tmp]))
 			tmp++;
 		 if (tmp == tmp1)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 
 		 tmp1 = str.find(")", tmp);
 		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 
 		 tmp = ++tmp1;
 		 tmp1 = str.find("x^", tmp);
 		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 
 		 tmp1 += 2;
 		 while (tmp1 < str.size() && isdigit(str[tmp1]))
 			tmp1++;
 
 		 if (tmp == tmp1)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 
 		 if (tmp1 == str.size())
 			break;
@@ -73,7 +73,7 @@ Polynom::Polynom(const string str)
 		 tmp = str.find("+", tmp);
 		 tmp1 = str.find("-", tmp1);
 		 if (tmp == -1 && tmp1 == -1)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 		 
 		 if (tmp == -1)
 			tmp = tmp1;
@@ -82,11 +82,11 @@ Polynom::Polynom(const string str)
 			tmp = tmp1;
 
 		 if ((tmp - tmp2) != 0)
-			return;
+			 throw(invalid_argument("incorrect number input. You can try help\n"));
 		 tmp++;
 	  }
 	  else
-		 return;
+		  throw(invalid_argument("incorrect number input. You can try help\n"));
    }
    while (true);
 
@@ -141,7 +141,7 @@ Polynom::Polynom(const string str)
 	  {
 		 coefficients.clear();
 		 coefficients.resize(0);
-		 return;
+		 throw(invalid_argument("incorrect number input. You can try help\n"));
 	  } 
 	  else
 	  {
