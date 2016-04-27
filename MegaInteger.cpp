@@ -26,14 +26,21 @@ MegaInteger::MegaInteger(long long a)
 }
 MegaInteger::MegaInteger(string str)
 {
-	if (str[0] == '-')
+	try
 	{
-		isNegative = true;
-		str.erase(0, 1);
+		if (str[0] == '-')
+		{
+			isNegative = true;
+			str.erase(0, 1);
+		}
+		else
+			isNegative = false;
+		num = MegaNatural(str);
 	}
-	else
-		isNegative = false;
-	num = MegaNatural(str);
+	catch (invalid_argument &exc)
+	{
+		throw exc;
+	}
 }
 
 MegaInteger::~MegaInteger() {}

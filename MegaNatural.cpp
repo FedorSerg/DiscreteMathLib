@@ -27,10 +27,7 @@ MegaNatural::MegaNatural(string str)
 	{
 		uchar c = (uchar)(str[i] - '0');
 		if (c > 9)
-		{
-			std::cout << "Error! Incorrect string in MegaNatural constructor.";
-			isInputCorrect = false;
-		}
+			throw invalid_argument("incorrect number input. You can try help\n");
 		else
 			nums.push_front(c);
 	}
@@ -239,10 +236,7 @@ MegaNatural operator +(const MegaNatural &ob1, const MegaNatural &ob2)
 MegaNatural operator -(const MegaNatural &ob1, const MegaNatural &ob2)
 {
 	if (ob1 < ob2)
-	{
-		printf("a-b (a<b) error return 0");
-		return 0;
-	}
+		throw(invalid_argument("ups, result < 0\n"));
 	MegaNatural res;
 	int i, len1, len2, a, b;
 
@@ -292,10 +286,7 @@ MegaNatural operator /(const MegaNatural &aa, const MegaNatural &b)
    MegaNatural res = 0;
 
    if (b == 0)
-   {
-	  printf("division by zero");
-	  return 0;
-   }
+	   throw(invalid_argument("r u really want to div by 0?\n"));
    
    while (a.nums.size() > 0)
    {
@@ -324,7 +315,14 @@ MegaNatural operator /(const MegaNatural &aa, const MegaNatural &b)
 
 MegaNatural operator %(const MegaNatural &ob1, const MegaNatural &ob2)
 {
-	return ob1 - ob2 * (ob1 / ob2);
+	try 
+	{
+		return ob1 - ob2 * (ob1 / ob2);
+	}
+	catch (invalid_argument &exc)
+	{
+		throw exc;
+	}
 }
 
 MegaNatural operator *(const MegaNatural &ob1, const MegaNatural &ob2)

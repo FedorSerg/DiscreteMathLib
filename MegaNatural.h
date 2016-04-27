@@ -5,6 +5,7 @@
 #include <malloc.h>
 #include <deque>
 #include <string>
+#include <stdexcept>
 
 typedef unsigned char uchar;
 using namespace std;
