@@ -1,3 +1,5 @@
+MegaNatural getNextNum(string str, int& pos);
+
 Polynom::Polynom()
 {
 	this->coefficients.push_front((MegaRational)0);
@@ -5,7 +7,167 @@ Polynom::Polynom()
 
 Polynom::Polynom(const Polynom &ob)
 {
-	this->coefficients = deque<MegaRational>(ob.coefficients);
+	coefficients = deque<MegaRational>(ob.coefficients);
+}
+
+Polynom::Polynom(const string str)
+{
+   int tmp, tmp1, tmp2;
+
+   coefficients.clear();
+   if (str.length() < 9)
+	  return; 
+
+   for (auto i = 0; i < str.length(); i++)
+	  if (!isdigit(str[i]) && str[i] != 'x' && str[i] != '^' && str[i] != '+' && str[i] != '-' && str[i] != '/' && str[i] != '(' && str[i] != ')')
+		 return;
+	 
+   tmp = 0;
+   if (str[0] == '-' || str[0] == '+')
+	  tmp++;
+
+   do
+   {
+	  tmp1 = str.find("(", tmp);
+	  if (tmp1 != tmp)
+		 return;
+
+	  tmp = ++tmp1;
+	  while (tmp < str.size() && isdigit(str[tmp]))
+		 tmp++;
+	  if (tmp == tmp1)
+		 return;
+
+	  if (tmp != -1)
+	  {
+		 tmp1 = str.find("/", tmp);
+		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
+			return;		
+
+		 tmp = ++tmp1;
+		 while (tmp < str.size() && isdigit(str[tmp]))
+			tmp++;
+		 if (tmp == tmp1)
+			return;
+
+		 tmp1 = str.find(")", tmp);
+		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
+			return;
+
+		 tmp = ++tmp1;
+		 tmp1 = str.find("x^", tmp);
+		 if (tmp1 == -1 || (tmp1 - tmp) != 0)
+			return;
+
+		 tmp1 += 2;
+		 while (tmp1 < str.size() && isdigit(str[tmp1]))
+			tmp1++;
+
+		 if (tmp == tmp1)
+			return;
+
+		 if (tmp1 == str.size())
+			break;
+
+		 tmp2 = tmp = tmp1;
+		 tmp = str.find("+", tmp);
+		 tmp1 = str.find("-", tmp1);
+		 if (tmp == -1 && tmp1 == -1)
+			return;
+		 
+		 if (tmp == -1)
+			tmp = tmp1;
+
+		 if (tmp1 < tmp)
+			tmp = tmp1;
+
+		 if ((tmp - tmp2) != 0)
+			return;
+		 tmp++;
+	  }
+	  else
+		 return;
+   }
+   while (true);
+
+   MegaNatural lastCoef,b_lastCoef;
+   int sign;
+   MegaRational coef();
+   bool first = true;
+   int pos = 0;
+   
+   do
+   {
+	  if (first)
+	  {
+		 first = false;
+		 if (str[0] == '-')
+			sign = -1;
+		 else
+			sign = 1;
+
+		 MegaInteger numerator(getNextNum(str, pos));
+		 numerator = numerator*(MegaInteger)(-1);
+		 MegaNatural denominator(getNextNum(str, pos));
+		 coefficients.push_front(MegaRational(numerator, denominator));
+		 lastCoef = getNextNum(str, pos);
+		 continue;
+	  }
+	  tmp = str.find("+", pos);
+	  tmp1 = str.find("-", pos);
+	  if (tmp == -1 && tmp1 == -1)
+		 break;
+
+	  if (tmp != -1 && tmp1 != -1)
+		 if (tmp < tmp1)
+			sign = 1;
+		 else
+			sign = -1;
+
+	  if (tmp == -1)
+		 sign = -1;
+
+	  if (tmp1 == -1)
+		 sign = 1;
+
+	  MegaInteger numerator(getNextNum(str, pos));
+	  numerator = numerator*(MegaInteger) (-1);
+	  MegaNatural denominator(getNextNum(str, pos));
+	  coefficients.push_front(MegaRational(numerator, denominator));
+
+	  b_lastCoef = lastCoef;
+	  lastCoef = getNextNum(str, pos);
+	  if (lastCoef >= b_lastCoef)
+	  {
+		 coefficients.clear();
+		 coefficients.resize(0);
+		 return;
+	  } 
+	  else
+	  {
+		 while ((b_lastCoef - (MegaNatural) 1) > lastCoef)
+		 {
+			b_lastCoef = b_lastCoef - (MegaNatural) 1;
+			coefficients.push_front(MegaRational());
+		 }
+	  }
+   }
+   while (pos < str.size());
+}
+
+MegaNatural getNextNum(string str,int& pos)
+{
+   string res = "";
+
+   while (pos < str.size() && !isdigit(str[pos]))
+	  pos++;  
+
+   while (pos < str.size() && isdigit(str[pos]))
+   {
+	  res += (str[pos]);
+	  pos++;
+   }	  
+   return MegaNatural(res);
 }
 
 Polynom::Polynom(const MegaRational *coeffs, long degree)
@@ -27,7 +189,10 @@ Polynom::~Polynom()
 
 long long Polynom::getDegree()
 {
-	return this->coefficients.size() - 1;
+   if(this->coefficients.size() == 0)
+	  return this->coefficients.size();
+   else
+	  return this->coefficients.size() - 1;
 }
 
 Polynom Polynom::fluxion()
