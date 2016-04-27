@@ -74,8 +74,6 @@ void natApi(int argc, char **argv)
 			cout << "result: " << (a / b);
 		else if (!strcmp(argv[2], "%"))
 			cout << "result: " << (a % b);
-		else if (!strcmp(argv[2], "+"))
-			cout << "result: " << (a + b);
 		else
 			cout << "unknown comand. You can try help\n";
 	}
@@ -90,7 +88,7 @@ void intApi(int argc, char **argv)
 	try
 	{
 		MegaInteger a = MegaInteger(argv[3]);
-		MegaInteger b = argc == 5 ? MegaInteger(argv[4]) : MegaInteger(0);
+		MegaInteger b = argc == 5 ? MegaInteger(argv[4]) : MegaInteger();
 
 		if (argc == 5)
 		{
@@ -114,8 +112,6 @@ void intApi(int argc, char **argv)
 				cout << "result: " << (a / b);
 			else if (!strcmp(argv[2], "%"))
 				cout << "result: " << (a % b);
-			else if (!strcmp(argv[2], "+"))
-				cout << "result: " << (a + b);
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
@@ -123,7 +119,7 @@ void intApi(int argc, char **argv)
 			cout << a.abs();
 		else
 			cout << "unknown comand + argument ct. You can try help\n";
-		
+
 	}
 	catch (invalid_argument &exc)
 	{
@@ -133,7 +129,52 @@ void intApi(int argc, char **argv)
 
 void ratApi(int argc, char **argv)
 {
+	try
+	{
+		MegaRational a = MegaRational(argv[3]);
+		MegaRational b = argc == 5 ? MegaRational(argv[4]) : MegaRational();
 
+		if (argc == 5)
+		{
+			if (!strcmp(argv[2], "=="))
+				cout << "result: " << ((a == b) ? "true" : "false");
+			else if (!strcmp(argv[2], "!="))
+				cout << "result: " << ((a != b) ? "true" : "false");
+			else if (!strcmp(argv[2], "<="))
+				cout << "result: " << ((a <= b) ? "true" : "false");
+			else if (!strcmp(argv[2], ">="))
+				cout << "result: " << ((a >= b) ? "true" : "false");
+			else if (!strcmp(argv[2], "<"))
+				cout << "result: " << ((a < b) ? "true" : "false");
+			else if (!strcmp(argv[2], ">"))
+				cout << "result: " << ((a > b) ? "true" : "false");
+			else if (!strcmp(argv[2], "+"))
+				cout << "result: " << (a + b);
+			else if (!strcmp(argv[2], "-"))
+				cout << "result: " << (a - b);
+			else if (!strcmp(argv[2], "*"))
+				cout << "result: " << (a * b);
+			else if (!strcmp(argv[2], "/"))
+				cout << "result: " << (a / b);
+			else
+				cout << "unknown comand + argument ct. You can try help\n";
+		}
+		else if (argc == 4)
+			if (!strcmp(argv[2], "reduct"))
+			{
+				a.reduction();
+				cout << a;
+			}
+			else if (!strcmp(argv[2], "isint"))
+				cout << (a.isInteger()) ? "true" : "false";
+			else
+				cout << "unknown comand + argument ct. You can try help\n";
+
+	}
+	catch (invalid_argument &exc)
+	{
+		cout << exc.what();
+	}
 }
 
 void plnApi(int argc, char **argv)
