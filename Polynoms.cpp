@@ -78,7 +78,7 @@ Polynom::Polynom(const string str)
 		 if (tmp == -1)
 			tmp = tmp1;
 
-		 if (tmp1 < tmp)
+		 if (tmp1 != -1 && tmp1 < tmp)
 			tmp = tmp1;
 
 		 if ((tmp - tmp2) != 0)
