@@ -204,9 +204,10 @@ long long Polynom::getDegree()
 Polynom Polynom::fluxion()
 {
 	Polynom p;
+	p.coefficients.pop_back();
 
 	for (int i = 1; i <= this->getDegree(); i++)
-		p.coefficients.push_front((this->coefficients[i])*(MegaRational)i);
+		p.coefficients.push_back((this->coefficients[i])*(MegaRational)i);
 
 	return p;
 }
@@ -221,6 +222,7 @@ bool operator ==(const Polynom &p1, const Polynom &p2)
 			return false;
 	return true;
 }
+
 bool operator !=(const Polynom &p1, const Polynom &p2)
 {
 	return !(p1 == p2);
@@ -235,14 +237,16 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 		res = p2, tmp = p1;
 	for (int i = 0; i < tmp.coefficients.size(); i++)
 		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
-	for (int i = res.coefficients.size(); i > 0 && res.coefficients[i] == MegaRational(); i--)
+	for (int i = res.coefficients.size() - 1; i > 1 && res.coefficients[i] == (MegaRational)0; i--)
 		res.coefficients.pop_back();
 	return res;
 }
+
 Polynom operator -(const Polynom &p1, const Polynom &p2)
 {
 	return p1 + -p2;
 }
+
 Polynom operator /(const Polynom &p1, const Polynom &p2)
 {
 	Polynom res, _p1 = p1, _p2 = p2;
@@ -264,6 +268,7 @@ Polynom operator /(const Polynom &p1, const Polynom &p2)
 
 	return res;
 }
+
 Polynom operator %(const Polynom &p1, const Polynom &p2)
 {
 	return p1 - p2 * (p1 / p2);
@@ -346,4 +351,35 @@ MegaRational Polynom::factorization()
 		coefficients[i] = coefficients[i] * MegaRational(MegaInteger(lcm), gcd);
 
 	return coefficent;
+}
+
+string Polynom::toString()
+{
+	string str;
+	for (auto i = getDegree(); i >= 0; i--)
+	{
+		if (coefficients[i] != MegaRational(0))
+		{
+			if (coefficients[i].getNumerator() < 0)
+				str += "-";
+			else if (i != getDegree())
+				str += "+";
+
+			if (coefficients[i].getDenominator() != 1)
+				str += '(';
+			str += coefficients[i].getNumerator().abs().toString();
+			if (coefficients[i].getDenominator() != 1)
+				str += '/' + coefficients[i].getDenominator().toString() + ')';
+			if (i > 0)
+			{
+				str += 'x';
+				if (i > 1)
+				{
+					str += '^';
+					str += i + '0';
+				}
+			}
+		}
+	}
+	return str;
 }
