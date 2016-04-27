@@ -34,7 +34,10 @@ int main(int argc, char* argv[])
 	else if (!strcmp(argv[1], "pln"))
 		plnApi(argc, argv);
 	else
+	{
 		cout << "incorrect type. You can try help\n";
+		return -1;
+	}
 
 	return 0;
 }
@@ -84,7 +87,48 @@ void natApi(int argc, char **argv)
 
 void intApi(int argc, char **argv)
 {
+	try
+	{
+		MegaInteger a = MegaInteger(argv[3]);
+		MegaInteger b = argc == 5 ? MegaInteger(argv[4]) : MegaInteger(0);
 
+		if (argc == 5)
+		{
+			if (!strcmp(argv[2], "=="))
+				cout << "result: " << ((a == b) ? "true" : "false");
+			else if (!strcmp(argv[2], "!="))
+				cout << "result: " << ((a != b) ? "true" : "false");
+			else if (!strcmp(argv[2], ">="))
+				cout << "result: " << ((a >= b) ? "true" : "false");
+			else if (!strcmp(argv[2], "<="))
+				cout << "result: " << ((a <= b) ? "true" : "false");
+			else if (!strcmp(argv[2], ">"))
+				cout << "result: " << ((a > b) ? "true" : "false");
+			else if (!strcmp(argv[2], "<"))
+				cout << "result: " << ((a < b) ? "true" : "false");
+			else if (!strcmp(argv[2], "+"))
+				cout << "result: " << (a + b);
+			else if (!strcmp(argv[2], "-"))
+				cout << "result: " << (a - b);
+			else if (!strcmp(argv[2], "/"))
+				cout << "result: " << (a / b);
+			else if (!strcmp(argv[2], "%"))
+				cout << "result: " << (a % b);
+			else if (!strcmp(argv[2], "+"))
+				cout << "result: " << (a + b);
+			else
+				cout << "unknown comand + argument ct. You can try help\n";
+		}
+		else if (argc == 4 && !strcmp(argv[2], "abs"))
+			cout << a.abs();
+		else
+			cout << "unknown comand + argument ct. You can try help\n";
+		
+	}
+	catch (invalid_argument &exc)
+	{
+		cout << exc.what();
+	}
 }
 
 void ratApi(int argc, char **argv)
