@@ -34,7 +34,7 @@ public:
 	//Базовые модули: COM_NN_D
 	//Выполнил: 
 	friend bool operator ==(const MegaInteger &ob1, const MegaInteger &ob2);
-	friend bool operator!=(const MegaInteger &ob1, const MegaInteger &ob2);
+	friend bool operator !=(const MegaInteger &ob1, const MegaInteger &ob2);
 	friend bool operator <(const MegaInteger &ob1, const MegaInteger &ob2);
 	friend bool operator >(const MegaInteger &ob1, const MegaInteger &ob2);
 	friend bool operator <=(const MegaInteger &ob1, const MegaInteger &ob2);

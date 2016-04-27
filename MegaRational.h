@@ -13,6 +13,7 @@ public:
 	MegaRational(const MegaInteger &a);
 	MegaRational(const MegaInteger &a, const MegaNatural &b);
 	MegaRational(const MegaRational &a);
+	MegaRational(string str);
 	~MegaRational();
 
 	MegaRational& operator =(const MegaRational &ob);
