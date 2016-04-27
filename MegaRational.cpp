@@ -1,4 +1,4 @@
-MegaRational::MegaRational()
+﻿MegaRational::MegaRational()
 {
 	numerator = MegaInteger();
 	denominator = MegaNatural(1);
@@ -26,7 +26,28 @@ MegaRational::MegaRational(const MegaRational &a)
 
 MegaRational::MegaRational(string str)
 {
-
+	string strNumerator, strDenominator;
+	bool isInputedNumerator = 0, isRepeatSlash = 0;
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str[i] > '9' || str[i] == '/' && isRepeatSlash || str[i] == '-' && i != 0)
+			throw invalid_argument("incorrect input");
+		else if (str[i] == '/')
+		{
+			isInputedNumerator = 1;
+			isRepeatSlash = 1;
+		}
+		else if (!isInputedNumerator)
+			strNumerator += str[i];
+		else 
+			strDenominator += str[i];
+	}
+	denominator = MegaNatural(strDenominator);
+	if (denominator == 0)
+		throw invalid_argument("incorrect input");
+	
+	numerator = MegaInteger(strNumerator);
+	reduction();
 }
 
 MegaRational::~MegaRational() {}
