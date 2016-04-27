@@ -107,7 +107,7 @@ Polynom::Polynom(const string str)
 			sign = 1;
 
 		 MegaInteger numerator(getNextNum(str, pos));
-		 numerator = numerator*(MegaInteger)(-1);
+		 numerator = numerator*(MegaInteger)(sign);
 		 MegaNatural denominator(getNextNum(str, pos));
 		 coefficients.push_front(MegaRational(numerator, denominator));
 		 lastCoef = getNextNum(str, pos);
@@ -131,11 +131,13 @@ Polynom::Polynom(const string str)
 		 sign = 1;
 
 	  MegaInteger numerator(getNextNum(str, pos));
-	  numerator = numerator*(MegaInteger) (-1);
+	  numerator = numerator*(MegaInteger) (sign);
 	  MegaNatural denominator(getNextNum(str, pos));
-	  coefficients.push_front(MegaRational(numerator, denominator));
+	  
 
 	  b_lastCoef = lastCoef;
+	  MegaRational waited = MegaRational(numerator, denominator);
+	  
 	  lastCoef = getNextNum(str, pos);
 	  if (lastCoef >= b_lastCoef)
 	  {
@@ -151,6 +153,7 @@ Polynom::Polynom(const string str)
 			coefficients.push_front(MegaRational());
 		 }
 	  }
+	  coefficients.push_front(waited);
    }
    while (pos < str.size());
    while (lastCoef>(MegaNatural)0)
@@ -237,7 +240,7 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 		res = p2, tmp = p1;
 	for (int i = 0; i < tmp.coefficients.size(); i++)
 		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
-	for (int i = res.coefficients.size() - 1; i > 1 && res.coefficients[i] == MegaRational(); i--)
+	for (int i = res.coefficients.size() - 1; i > 1 && (res.coefficients[i] == MegaRational((MegaInteger) 0)); i--)
 		res.coefficients.pop_back();
 	return res;
 }
@@ -363,6 +366,7 @@ string Polynom::toString()
 	for (auto i = getDegree(); i >= 0; i--)
 	{
 		if (coefficients[i] != MegaRational())
+
 		{
 			if (coefficients[i].getNumerator() < 0)
 				str += "-";
