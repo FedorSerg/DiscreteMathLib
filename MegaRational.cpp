@@ -168,7 +168,7 @@ void toCommonDenominator(MegaRational &ob1, MegaRational &ob2)
 string MegaRational::toString()
 {
 	string str = numerator.toString();
-	if (denominator != 1)
+	if (denominator != 1 && denominator != 0)
 		str += "/" + denominator.toString();
 	return str;
 }

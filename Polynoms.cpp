@@ -15,7 +15,7 @@ Polynom::Polynom(const string str)
    int tmp, tmp1, tmp2;
 
    coefficients.clear();
-   if (str.length() < 9)
+   if (str.length() < 8)
 	   throw(invalid_argument("incorrect number input. You can try help\n"));
 
    for (auto i = 0; i < str.length(); i++)
@@ -153,6 +153,12 @@ Polynom::Polynom(const string str)
 	  }
    }
    while (pos < str.size());
+   while (lastCoef>(MegaNatural)0)
+   {
+	   lastCoef = lastCoef - (MegaNatural)1;
+	   coefficients.push_front(MegaRational());
+
+   }
 }
 
 MegaNatural getNextNum(string str,int& pos)
