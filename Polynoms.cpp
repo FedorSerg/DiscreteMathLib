@@ -237,7 +237,7 @@ Polynom operator +(const Polynom &p1, const Polynom &p2)
 		res = p2, tmp = p1;
 	for (int i = 0; i < tmp.coefficients.size(); i++)
 		res.coefficients[i] = res.coefficients[i] + tmp.coefficients[i];
-	for (int i = res.coefficients.size() - 1; i > 1 && res.coefficients[i] == (MegaRational)0; i--)
+	for (int i = res.coefficients.size() - 1; i > 1 && res.coefficients[i] == MegaRational(); i--)
 		res.coefficients.pop_back();
 	return res;
 }
@@ -251,10 +251,7 @@ Polynom operator /(const Polynom &p1, const Polynom &p2)
 {
 	Polynom res, _p1 = p1, _p2 = p2;
 	if (_p2.getDegree() == 0)
-	{
-		cout << "Error! Division by zero in Polynom /.";
-		return Polynom();
-	}
+		throw(invalid_argument("Error, div by zero polynom\n"));
 
 	long long n = _p2.getDegree(), k = _p1.getDegree() - n;
 	while (k >= 0)
@@ -271,7 +268,14 @@ Polynom operator /(const Polynom &p1, const Polynom &p2)
 
 Polynom operator %(const Polynom &p1, const Polynom &p2)
 {
-	return p1 - p2 * (p1 / p2);
+	try
+	{
+		return p1 - p2 * (p1 / p2);
+	}
+	catch (invalid_argument &exc)
+	{
+		throw exc;
+	}
 }
 
 Polynom operator *(const Polynom &p1, const Polynom &p2)
@@ -358,7 +362,7 @@ string Polynom::toString()
 	string str;
 	for (auto i = getDegree(); i >= 0; i--)
 	{
-		if (coefficients[i] != MegaRational(0))
+		if (coefficients[i] != MegaRational())
 		{
 			if (coefficients[i].getNumerator() < 0)
 				str += "-";
@@ -382,4 +386,10 @@ string Polynom::toString()
 		}
 	}
 	return str;
+}
+
+ostream& operator<<(std::ostream &os, Polynom &ob)
+{
+	os << ob.toString();
+	return os;
 }

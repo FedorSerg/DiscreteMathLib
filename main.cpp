@@ -192,19 +192,27 @@ void plnApi(int argc, char **argv)
 				cout << "result: " << ((a == b) ? "true" : "false");
 			else if (!strcmp(argv[2], "!="))
 				cout << "result: " << ((a != b) ? "true" : "false");
-			/*else if (!strcmp(argv[2], "+"))
-				cout << "result: " << (a + b);*/
+			else if (!strcmp(argv[2], "+"))
+				cout << "result: " << (a + b);
+			else if (!strcmp(argv[2], "-"))
+				cout << "result: " << (a - b);
+			else if (!strcmp(argv[2], "*"))
+				cout << "result: " << (a * b);
+			else if (!strcmp(argv[2], "/"))
+				cout << "result: " << (a / b);
+			else if (!strcmp(argv[2], "%"))
+				cout << "result: " << (a % b);
+			else if (!strcmp(argv[2], "check"))
+				cout << "result: " << a << "   " << b;
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
-		/*else if (argc == 4)
-			if (!strcmp(argv[2], "reduct"))
+		else if (argc == 4)
+			if (!strcmp(argv[2], "flux"))
 			{
-				a.reduction();
+				a.fluxion();
 				cout << a;
 			}
-			else if (!strcmp(argv[2], "isint"))
-				cout << (a.isInteger()) ? "true" : "false";*/
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
 
