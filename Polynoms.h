@@ -33,6 +33,7 @@ public:
 	friend Polynom operator -(const Polynom &p);
 	Polynom &operator =(const Polynom &p);
 	string toString();
+	friend ostream& operator<<(std::ostream &os, Polynom &ob);
 
 private:
 	deque<MegaRational> coefficients;

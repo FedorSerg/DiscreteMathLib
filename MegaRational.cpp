@@ -168,14 +168,12 @@ MegaRational operator -(const MegaRational &ob)
 
 MegaRational& MegaRational::operator =(const MegaRational &ob)
 {
-	MegaRational res;
 	if (this != &ob)
 	{
-		res.numerator = ob.numerator;
-		res.denominator = ob.denominator;
+		this->denominator = ob.denominator;
+		this->numerator = ob.numerator;
 	}
-	else res = ob;
-	return res;
+	return *this;
 }
 
 void toCommonDenominator(MegaRational &ob1, MegaRational &ob2)

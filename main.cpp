@@ -44,7 +44,22 @@ int main(int argc, char* argv[])
 
 void help()
 {
-
+	cout << "1. First parameter is type of object:" << endl;
+	cout << "     nat - Natural number" << endl;
+	cout << "     int - Integer number" << endl;
+	cout << "     rat - Rational number" << endl;
+	cout << "     pln - Polynom" << endl;
+	cout << "2. Second parameter is operator:" << endl;
+	cout << "   Examples:" << endl;
+	cout << "     / - divison:" << endl;
+	cout << "     * - multiply:" << endl;
+	cout << "     flux - fluxion:" << endl;
+	cout << "3. Third (and fourth) parameters are arguments:" << endl;
+	cout << "   Examples:" << endl;
+	cout << "     nat - \"5\"" << endl;
+	cout << "     int - \"-6\"" << endl;
+	cout << "     rat - \"7/8\"" << endl;
+	cout << "     pln - \"(6/7)x^3+(8/9)x^0\"" << endl;
 }
 
 void natApi(int argc, char **argv)
@@ -117,6 +132,11 @@ void intApi(int argc, char **argv)
 		}
 		else if (argc == 4 && !strcmp(argv[2], "abs"))
 			cout << "result: " << a.abs();
+		else if (!strcmp(argv[2], "check"))
+		{
+			b = a;
+			cout << a << "  " << b;
+		}
 		else
 			cout << "unknown comand + argument ct. You can try help\n";
 
@@ -168,9 +188,29 @@ void ratApi(int argc, char **argv)
 			}
 			else if (!strcmp(argv[2], "isint"))
 				cout << (a.isInteger()) ? "true" : "false";
+			else if (!strcmp(argv[2], "check"))
+			{
+				b = a;
+				cout << b;
+				cout << b.getNumerator() << "  " << b.getDenominator();
+			}
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
+		else if (argc == 3)
+			if (!strcmp(argv[3], "help"))
+			{
+				cout << "Operators in polynom:" << endl;
+				cout << "+" << endl;
+				cout << "-" << endl;
+				cout << "*" << endl;
+				cout << "/" << endl;
+				cout << "%" << endl;
+				cout << "==" << endl;
+				cout << "!=" << endl;
+				cout << "!=" << endl;
+				cout << "flux" << endl;
+			}
 
 	}
 	catch (invalid_argument &exc)
@@ -184,7 +224,7 @@ void plnApi(int argc, char **argv)
 	try
 	{
 		Polynom a = Polynom(argv[3]);
-		Polynom b = argc == 5 ? Polynom(argv[4]) : Polynom();
+		Polynom b = (argc == 5) ? Polynom(argv[4]) : Polynom();
 
 		if (argc == 5)
 		{
@@ -202,19 +242,16 @@ void plnApi(int argc, char **argv)
 				cout << "result: " << (a / b);
 			else if (!strcmp(argv[2], "%"))
 				cout << "result: " << (a % b);
-			else if (!strcmp(argv[2], "check"))
-				cout << "result: " << a << "   " << b;
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
 		}
 		else if (argc == 4)
+		{
 			if (!strcmp(argv[2], "flux"))
-			{
-				a.fluxion();
-				cout << a;
-			}
+				cout << a.fluxion();
 			else
 				cout << "unknown comand + argument ct. You can try help\n";
+		}
 
 	}
 	catch (invalid_argument &exc)
